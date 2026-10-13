@@ -14,13 +14,13 @@ export default function AppShell({ children }) {
   const { hydrated, onboarded, user } = useApp();
 
   // route guard: onboarding -> login -> app
-  useEffect(() => {
-    if (!hydrated) return;
-    if (!onboarded) router.replace("/onboarding");
-    else if (!user) router.replace("/login");
-  }, [hydrated, onboarded, user, router]);
+  // useEffect(() => {
+  //   if (!hydrated) return;
+  //   if (!onboarded) router.replace("/onboarding");
+  //   else if (!user) router.replace("/login");
+  // }, [hydrated, onboarded, user, router]);
 
-  const ready = hydrated && onboarded && !!user;
+  // const ready = hydrated && onboarded && !!user;
 
 
   return (
@@ -43,11 +43,11 @@ export default function AppShell({ children }) {
       <BottomNav />
       <CreatePostModal />
 
-      {!ready && (
+      {/* {!ready && (
         <Center position="fixed" inset={0} zIndex={2000} bg="app.bg">
           <Spinner color="app.brand" thickness="3px" size="lg" />
         </Center>
-      )}
+      )} */}
     </Box>
   );
 }
