@@ -2,6 +2,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { ColorModeScript } from "@chakra-ui/react";
 import Providers from "./providers";
 import PwaRegister from "../pwa-register";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],

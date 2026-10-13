@@ -1,28 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Box, Center, Flex, Spinner } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import TopNav from "./TopNav";
 import Sidebar from "./Sidebar";
 import BottomNav from "./BottomNav";
 import CreatePostModal from "@/components/home/CreatePostModal";
-import { useApp } from "@/context/AppContext";
 
 export default function AppShell({ children }) {
-  const router = useRouter();
-  const { hydrated, onboarded, user } = useApp();
-
-  // route guard: onboarding -> login -> app
-  // useEffect(() => {
-  //   if (!hydrated) return;
-  //   if (!onboarded) router.replace("/onboarding");
-  //   else if (!user) router.replace("/login");
-  // }, [hydrated, onboarded, user, router]);
-
-  // const ready = hydrated && onboarded && !!user;
-
-
   return (
     <Box minH="100dvh" bg="app.bg">
       <TopNav />
@@ -42,12 +26,6 @@ export default function AppShell({ children }) {
       </Flex>
       <BottomNav />
       <CreatePostModal />
-
-      {/* {!ready && (
-        <Center position="fixed" inset={0} zIndex={2000} bg="app.bg">
-          <Spinner color="app.brand" thickness="3px" size="lg" />
-        </Center>
-      )} */}
     </Box>
   );
 }
