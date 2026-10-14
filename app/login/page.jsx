@@ -21,7 +21,7 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import { FaApple, FaGoogle } from "react-icons/fa";
+import { FaApple, FaGoogle, FaLinkedin } from "react-icons/fa";
 import { FiArrowRight, FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "react-icons/fi";
 import PhoneFrame from "@/components/onboarding/PhoneFrame";
 import Logo from "@/components/ui/Logo";
@@ -133,8 +133,8 @@ export default function LoginPage() {
           <Button w="full" h="46px" variant="outlineApp" bg="app.card" leftIcon={<FaGoogle />} onClick={() => social("Google")} isDisabled={loading}>
             Continue with Google
           </Button>
-          <Button w="full" h="46px" variant="outlineApp" bg="app.card" leftIcon={<FaApple />} onClick={() => social("Apple")} isDisabled={loading}>
-            Continue with Apple
+          <Button w="full" h="46px" variant="outlineApp" bg="app.card" leftIcon={<FaLinkedin />} onClick={() => social("Apple")} isDisabled={loading}>
+            Continue with LinkedIn
           </Button>
         </VStack>
 

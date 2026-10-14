@@ -3,8 +3,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isValidMotionProp, motion } from "framer-motion";
-import { Box, Button, Flex, HStack, Heading, Text, chakra } from "@chakra-ui/react";
-import { FiArrowRight } from "react-icons/fi";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Heading,
+  Text,
+  chakra,
+} from "@chakra-ui/react";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import PhoneFrame from "@/components/onboarding/PhoneFrame";
 import Logo from "@/components/ui/Logo";
 import {
@@ -81,7 +89,7 @@ export default function OnboardingPage() {
       if (next >= SLIDES.length) return finish();
       setPage([next, d]);
     },
-    [index, finish]
+    [index, finish],
   );
 
   useEffect(() => {
@@ -101,7 +109,12 @@ export default function OnboardingPage() {
         {/* top bar */}
         <Flex justify="space-between" align="center" minH="28px">
           <Box />
-          <Button variant="ghostApp" size="sm" onClick={finish} color="app.muted">
+          <Button
+            variant="ghostApp"
+            size="sm"
+            onClick={finish}
+            color="app.muted"
+          >
             Skip
           </Button>
         </Flex>
@@ -145,12 +158,24 @@ export default function OnboardingPage() {
                 color="app.text"
               >
                 {slide.title.map((line, i) => (
-                  <Box as="span" display="block" key={i} color={i === slide.accent ? "app.accent" : undefined}>
+                  <Box
+                    as="span"
+                    display="block"
+                    key={i}
+                    color={i === slide.accent ? "app.accent" : undefined}
+                  >
                     {line}
                   </Box>
                 ))}
               </Heading>
-              <Text mt={3} fontSize="sm" color="app.muted" maxW="300px" mx="auto" lineHeight="1.6">
+              <Text
+                mt={3}
+                fontSize="sm"
+                color="app.muted"
+                maxW="300px"
+                mx="auto"
+                lineHeight="1.6"
+              >
                 {slide.body}
               </Text>
             </Box>
@@ -178,9 +203,24 @@ export default function OnboardingPage() {
               />
             ))}
           </HStack>
-          <Button rightIcon={<FiArrowRight />} px={7} h="46px" onClick={() => paginate(1)}>
-            {last ? "Get Started" : "Next"}
-          </Button>
+          <Flex gap={3}>
+            <Button
+              w={"46px"}
+              h={"46px"}
+              borderRadius={"50%"}
+              onClick={() => paginate(-1)}
+            >
+              <FiArrowLeft />
+            </Button>
+            <Button
+              w={"46px"}
+              h={"46px"}
+              borderRadius={"50%"}
+              onClick={() => paginate(1)}
+            >
+              <FiArrowRight />
+            </Button>
+          </Flex>
         </Flex>
       </Flex>
     </PhoneFrame>

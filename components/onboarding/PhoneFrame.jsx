@@ -2,7 +2,6 @@
 
 import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
 
-// Full-screen on mobile, centred "phone" card on larger screens
 export default function PhoneFrame({ children }) {
   const backdrop = useColorModeValue("#2A1A11", "#0C0806");
   const bg = useColorModeValue(
@@ -15,7 +14,7 @@ export default function PhoneFrame({ children }) {
       <Box
         position="relative"
         w="full"
-        maxW={{ base: "full", md: "420px" }}
+        maxW={{ base: "full", md: "720px" }}
         h={{ base: "100dvh", md: "min(860px, calc(100dvh - 48px))" }}
         rounded={{ base: 0, md: "36px" }}
         overflow="hidden"

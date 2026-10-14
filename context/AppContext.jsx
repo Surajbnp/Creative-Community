@@ -21,8 +21,6 @@ const Ctx = createContext(null);
 const initialState = {
   onboarded: false,
   user: null,
-  // generic id lists: following, joined (communities/projects), saved (posts/gigs),
-  // liked (posts), applied (gigs), rsvp (events)
   flags: { following: ["c1"], joined: ["cm1"], saved: [], liked: [], applied: [], rsvp: [] },
   posts: INITIAL_POSTS,
   conversations: CONVERSATIONS,
@@ -87,7 +85,7 @@ export function AppProvider({ children }) {
     []
   );
 
-  const logout = useCallback(() => setState((s) => ({ ...s, user: null })), []);
+  const logout = useCallback(() => setState((s) => ({ ...s, user: null, onboarded: false })), []);
 
   const updateUser = useCallback(
     (patch) => setState((s) => ({ ...s, user: { ...s.user, ...patch } })),
