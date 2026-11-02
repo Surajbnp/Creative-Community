@@ -28,7 +28,15 @@ import {
   VStack,
   useColorMode,
 } from "@chakra-ui/react";
-import { FiBell, FiChevronLeft, FiLogOut, FiMoon, FiSearch, FiSun, FiUser } from "react-icons/fi";
+import {
+  FiBell,
+  FiChevronLeft,
+  FiLogOut,
+  FiMoon,
+  FiSearch,
+  FiSun,
+  FiUser,
+} from "react-icons/fi";
 import Logo from "@/components/ui/Logo";
 import { PAGE_TITLES, TOP_LINKS, isActive } from "@/lib/nav";
 import { useApp } from "@/context/AppContext";
@@ -66,10 +74,27 @@ function Notifications() {
           Notifications
         </PopoverHeader>
         <PopoverBody p={0} maxH="360px" overflowY="auto">
-          <VStack align="stretch" spacing={0} divider={<Box borderBottom="1px solid" borderColor="app.border" />}>
+          <VStack
+            align="stretch"
+            spacing={0}
+            divider={<Box borderBottom="1px solid" borderColor="app.border" />}
+          >
             {notifications.map((n) => (
-              <Flex key={n.id} px={4} py={3} gap={3} align="start" opacity={n.read ? 0.75 : 1}>
-                <Box boxSize="8px" mt="7px" rounded="full" bg={n.read ? "transparent" : "app.accent"} flexShrink={0} />
+              <Flex
+                key={n.id}
+                px={4}
+                py={3}
+                gap={3}
+                align="start"
+                opacity={n.read ? 0.75 : 1}
+              >
+                <Box
+                  boxSize="8px"
+                  mt="7px"
+                  rounded="full"
+                  bg={n.read ? "transparent" : "app.accent"}
+                  flexShrink={0}
+                />
                 <Box>
                   <Text fontSize="sm">{n.text}</Text>
                   <Text fontSize="xs" color="app.muted">
@@ -133,11 +158,14 @@ export default function TopNav() {
 
   const submit = (e) => {
     e.preventDefault();
-    router.push(q.trim() ? `/discover?q=${encodeURIComponent(q.trim())}` : "/discover");
+    router.push(
+      q.trim() ? `/discover?q=${encodeURIComponent(q.trim())}` : "/discover",
+    );
   };
 
   const isHome = pathname === "/";
-  const title = PAGE_TITLES[pathname] || PAGE_TITLES["/" + pathname.split("/")[1]] || "";
+  const title =
+    PAGE_TITLES[pathname] || PAGE_TITLES["/" + pathname.split("/")[1]] || "";
 
   return (
     <Box
@@ -180,7 +208,16 @@ export default function TopNav() {
                 _hover={{ color: "app.brand" }}
                 _after={
                   active
-                    ? { content: '""', position: "absolute", left: 0, right: 0, bottom: "-6px", h: "2px", bg: "app.brand", rounded: "full" }
+                    ? {
+                        content: '""',
+                        position: "absolute",
+                        left: 0,
+                        right: 0,
+                        bottom: "-6px",
+                        h: "2px",
+                        bg: "app.brand",
+                        rounded: "full",
+                      }
                     : undefined
                 }
               >
@@ -213,7 +250,9 @@ export default function TopNav() {
             onClick={toggleColorMode}
             rounded="full"
             variant="soft"
-            icon={colorMode === "light" ? <FiSun size={18} /> : <FiMoon size={18} />}
+            icon={
+              colorMode === "light" ? <FiSun size={18} /> : <FiMoon size={18} />
+            }
             color={colorMode === "light" ? "app.accent" : "app.brand"}
           />
           <Notifications />
@@ -222,7 +261,14 @@ export default function TopNav() {
       </Flex>
 
       {/* Mobile / tablet */}
-      <Flex display={{ base: "flex", lg: "none" }} px={4} h="60px" align="center" justify="space-between" gap={2}>
+      <Flex
+        display={{ base: "flex", lg: "none" }}
+        px={4}
+        h="60px"
+        align="center"
+        justify="space-between"
+        gap={2}
+      >
         <Flex flex="1" align="center" minW={0}>
           {isHome ? (
             <Logo size={26} />
@@ -238,7 +284,13 @@ export default function TopNav() {
           )}
         </Flex>
         {!isHome && (
-          <Heading as="h1" fontFamily="body" fontSize="md" fontWeight={700} noOfLines={1}>
+          <Heading
+            as="h1"
+            fontFamily="body"
+            fontSize="md"
+            fontWeight={700}
+            noOfLines={1}
+          >
             {title}
           </Heading>
         )}

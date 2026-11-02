@@ -21,8 +21,15 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import { FaApple, FaGoogle, FaLinkedin } from "react-icons/fa";
-import { FiArrowRight, FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "react-icons/fi";
+import { FaGoogle, FaLinkedin } from "react-icons/fa";
+import {
+  FiArrowRight,
+  FiEye,
+  FiEyeOff,
+  FiLock,
+  FiMail,
+  FiUser,
+} from "react-icons/fi";
 import PhoneFrame from "@/components/onboarding/PhoneFrame";
 import Logo from "@/components/ui/Logo";
 import { useApp } from "@/context/AppContext";
@@ -32,7 +39,7 @@ export default function LoginPage() {
   const toast = useToast();
   const { hydrated, onboarded, user, login } = useApp();
 
-  const [mode, setMode] = useState("login"); // login | signup
+  const [mode, setMode] = useState("login");
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
@@ -53,7 +60,8 @@ export default function LoginPage() {
     const er = {};
     if (mode === "signup" && !form.name.trim()) er.name = "Tell us your name";
     if (!form.email.trim()) er.email = "Email or username is required";
-    else if (form.email.includes("@") && !/^\S+@\S+\.\S+$/.test(form.email)) er.email = "Enter a valid email";
+    else if (form.email.includes("@") && !/^\S+@\S+\.\S+$/.test(form.email))
+      er.email = "Enter a valid email";
     if (form.password.length < 6) er.password = "Use at least 6 characters";
     setErrors(er);
     return Object.keys(er).length === 0;
@@ -61,7 +69,6 @@ export default function LoginPage() {
 
   const enter = (patch) => {
     setLoading(true);
-    // fake latency — replace with your real auth call later
     setTimeout(() => {
       login(patch);
       router.replace("/");
@@ -71,7 +78,9 @@ export default function LoginPage() {
   const submit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    enter(mode === "signup" && form.name.trim() ? { name: form.name.trim() } : {});
+    enter(
+      mode === "signup" && form.name.trim() ? { name: form.name.trim() } : {},
+    );
   };
 
   const social = (name) => {
@@ -82,16 +91,47 @@ export default function LoginPage() {
   return (
     <PhoneFrame>
       {/* decorative leaves */}
-      <Box position="absolute" top="-30px" right="-30px" boxSize="150px" rounded="70% 0 70% 0" bg="app.brand" opacity={0.1} transform="rotate(25deg)" />
-      <Box position="absolute" bottom="-40px" left="-40px" boxSize="170px" rounded="70% 0 70% 0" bg="app.accent" opacity={0.14} transform="rotate(-20deg)" />
+      <Box
+        position="absolute"
+        top="-30px"
+        right="-30px"
+        boxSize="150px"
+        rounded="70% 0 70% 0"
+        bg="app.brand"
+        opacity={0.1}
+        transform="rotate(25deg)"
+      />
+      <Box
+        position="absolute"
+        bottom="-40px"
+        left="-40px"
+        boxSize="170px"
+        rounded="70% 0 70% 0"
+        bg="app.accent"
+        opacity={0.14}
+        transform="rotate(-20deg)"
+      />
 
-      <Flex direction="column" h="full" px={7} py={8} overflowY="auto" position="relative" className="hide-scroll">
+      <Flex
+        direction="column"
+        h="full"
+        px={7}
+        py={8}
+        overflowY="auto"
+        position="relative"
+        className="hide-scroll"
+      >
         <Flex justify="center" mt={2}>
           <Logo size={40} />
         </Flex>
 
         <Box textAlign="center" mt={7}>
-          <Heading as="h1" fontFamily="heading" fontWeight={500} fontSize="30px">
+          <Heading
+            as="h1"
+            fontFamily="heading"
+            fontWeight={500}
+            fontSize="30px"
+          >
             {mode === "login" ? "Welcome Back" : "Join Zura"}
           </Heading>
           <Text mt={2} fontSize="sm" color="app.muted" maxW="260px" mx="auto">
@@ -102,7 +142,12 @@ export default function LoginPage() {
         </Box>
 
         {/* tabs */}
-        <HStack mt={6} spacing={0} borderBottom="1px solid" borderColor="app.border">
+        <HStack
+          mt={6}
+          spacing={0}
+          borderBottom="1px solid"
+          borderColor="app.border"
+        >
           {[
             ["login", "Login"],
             ["signup", "Sign Up"],
@@ -130,10 +175,28 @@ export default function LoginPage() {
         </HStack>
 
         <VStack mt={5} spacing={3}>
-          <Button w="full" h="46px" variant="outlineApp" bg="app.card" leftIcon={<FaGoogle />} onClick={() => social("Google")} isDisabled={loading}>
+          <Button
+            w="full"
+            h="46px"
+            variant="outlineApp"
+            bg="app.card"
+            leftIcon={<FaGoogle />}
+            isDisabled={loading}
+            onClick={() => {
+              window.location.href = `/api/auth/google`;
+            }}
+          >
             Continue with Google
           </Button>
-          <Button w="full" h="46px" variant="outlineApp" bg="app.card" leftIcon={<FaLinkedin />} onClick={() => social("Apple")} isDisabled={loading}>
+          <Button
+            w="full"
+            h="46px"
+            variant="outlineApp"
+            bg="app.card"
+            leftIcon={<FaLinkedin />}
+            onClick={() => social("Apple")}
+            isDisabled={loading}
+          >
             Continue with LinkedIn
           </Button>
         </VStack>
@@ -151,7 +214,13 @@ export default function LoginPage() {
                 <InputLeftElement h="48px" color="app.muted">
                   <FiUser />
                 </InputLeftElement>
-                <Input h="48px" placeholder="Full name" value={form.name} onChange={set("name")} autoComplete="name" />
+                <Input
+                  h="48px"
+                  placeholder="Full name"
+                  value={form.name}
+                  onChange={set("name")}
+                  autoComplete="name"
+                />
               </InputGroup>
               <FormErrorMessage>{errors.name}</FormErrorMessage>
             </FormControl>
@@ -161,7 +230,13 @@ export default function LoginPage() {
               <InputLeftElement h="48px" color="app.muted">
                 <FiMail />
               </InputLeftElement>
-              <Input h="48px" placeholder="Email or Username" value={form.email} onChange={set("email")} autoComplete="username" />
+              <Input
+                h="48px"
+                placeholder="Email or Username"
+                value={form.email}
+                onChange={set("email")}
+                autoComplete="username"
+              />
             </InputGroup>
             <FormErrorMessage>{errors.email}</FormErrorMessage>
           </FormControl>
@@ -176,7 +251,9 @@ export default function LoginPage() {
                 placeholder="Password"
                 value={form.password}
                 onChange={set("password")}
-                autoComplete={mode === "login" ? "current-password" : "new-password"}
+                autoComplete={
+                  mode === "login" ? "current-password" : "new-password"
+                }
               />
               <InputRightElement h="48px">
                 <IconButton
@@ -196,14 +273,27 @@ export default function LoginPage() {
               <CLink
                 fontSize="xs"
                 color="app.muted"
-                onClick={() => toast({ title: "Password reset coming soon", status: "info", duration: 1800 })}
+                onClick={() =>
+                  toast({
+                    title: "Password reset coming soon",
+                    status: "info",
+                    duration: 1800,
+                  })
+                }
               >
                 Forgot Password?
               </CLink>
             </Flex>
           )}
 
-          <Button type="submit" w="full" h="50px" mt={2} rightIcon={<FiArrowRight />} isLoading={loading}>
+          <Button
+            type="submit"
+            w="full"
+            h="50px"
+            mt={2}
+            rightIcon={<FiArrowRight />}
+            isLoading={loading}
+          >
             {mode === "login" ? "Login" : "Create account"}
           </Button>
         </VStack>

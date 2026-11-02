@@ -2,18 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, isValidMotionProp, useReducedMotion } from "framer-motion";
-import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Image,
-  Tag,
-  Text,
-  chakra,
-  shouldForwardProp,
-} from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, HStack, Image, Tag, Text, chakra, shouldForwardProp } from "@chakra-ui/react";
 import { FiBookmark } from "react-icons/fi";
 import Verified from "@/components/ui/Verified";
 import { GigLogo } from "@/components/cards/GigCard";
@@ -58,23 +47,11 @@ function usePlay(active = true) {
  * Looping keyframe element. `loop` = keyframe arrays (first value === last value
  * so the loop is seamless), `still` = static pose used for reduced motion / paused.
  */
-const Anim = ({
-  play,
-  loop,
-  still,
-  times,
-  dur = 8,
-  ease = "easeInOut",
-  ...props
-}) => (
+const Anim = ({ play, loop, still, times, dur = 8, ease = "easeInOut", ...props }) => (
   <M
     initial={false}
     animate={play ? loop : still}
-    transition={
-      play
-        ? { duration: dur, times, ease, repeat: Infinity }
-        : { duration: 0.25 }
-    }
+    transition={play ? { duration: dur, times, ease, repeat: Infinity } : { duration: 0.25 }}
     {...props}
   />
 );
@@ -97,12 +74,7 @@ const rise = ({ s, e, dx, dy, rot = 0 }) => {
 /* ───────────────────────── tiny illustrated bits ───────────────────────── */
 
 const Spark = ({ size = 14, color = GOLD }) => (
-  <chakra.svg
-    viewBox="0 0 20 20"
-    boxSize={`${size}px`}
-    aria-hidden="true"
-    display="block"
-  >
+  <chakra.svg viewBox="0 0 20 20" boxSize={`${size}px`} aria-hidden="true" display="block">
     <path
       d="M10 1 C10.8 6.5 13.5 9.2 19 10 C13.5 10.8 10.8 13.5 10 19 C9.2 13.5 6.5 10.8 1 10 C6.5 9.2 9.2 6.5 10 1Z"
       fill={color}
@@ -111,14 +83,7 @@ const Spark = ({ size = 14, color = GOLD }) => (
 );
 
 const Pointer = () => (
-  <chakra.svg
-    viewBox="0 0 22 26"
-    w="22px"
-    h="26px"
-    aria-hidden="true"
-    display="block"
-    filter="drop-shadow(0 2px 2px rgba(40,20,10,.35))"
-  >
+  <chakra.svg viewBox="0 0 22 26" w="22px" h="26px" aria-hidden="true" display="block" filter="drop-shadow(0 2px 2px rgba(40,20,10,.35))">
     <path
       d="M2 2 L2.4 20 L7 15.6 L10.4 23.6 L13.6 22.2 L10.2 14.6 L16.8 14 Z"
       fill="#FFF6E8"
@@ -130,33 +95,13 @@ const Pointer = () => (
 );
 
 const Heart = () => (
-  <chakra.svg
-    viewBox="0 0 20 18"
-    w="20px"
-    h="18px"
-    aria-hidden="true"
-    display="block"
-  >
-    <path
-      d="M10 17 C-2 9 3 1 10 6 C17 1 22 9 10 17Z"
-      fill={TERRA}
-      stroke="#FFF6E8"
-      strokeWidth="1.4"
-      strokeLinejoin="round"
-    />
+  <chakra.svg viewBox="0 0 20 18" w="20px" h="18px" aria-hidden="true" display="block">
+    <path d="M10 17 C-2 9 3 1 10 6 C17 1 22 9 10 17Z" fill={TERRA} stroke="#FFF6E8" strokeWidth="1.4" strokeLinejoin="round" />
   </chakra.svg>
 );
 
 const MiniCard = () => (
-  <Box
-    w="54px"
-    p={2}
-    rounded="lg"
-    bg="app.card"
-    border="1px solid"
-    borderColor="app.border"
-    shadow="0 8px 18px rgba(60,30,12,.25)"
-  >
+  <Box w="54px" p={2} rounded="lg" bg="app.card" border="1px solid" borderColor="app.border" shadow="0 8px 18px rgba(60,30,12,.25)">
     <Box boxSize="14px" rounded="full" bg={GOLD} mb={1.5} />
     <Box h="4px" rounded="full" bg="app.muted" opacity={0.45} mb="3px" />
     <Box h="4px" w="60%" rounded="full" bg="app.muted" opacity={0.45} />
@@ -185,24 +130,14 @@ export function SlideHero({ active = true }) {
   const door = [0, 0.06, 0.12, 0.18, 0.35, 0.62, 0.78, 1];
 
   return (
-    <Box
-      position="relative"
-      h="100%"
-      w="full"
-      display="flex"
-      justifyContent="center"
-      alignItems="flex-end"
-    >
+    <Box position="relative" h="100%" w="full" display="flex" justifyContent="center" alignItems="flex-end">
       <Box position="relative" w="86%" h="92%">
         {/* warm glow behind the door */}
         <Anim
           play={play}
           times={door}
           dur={T}
-          loop={{
-            opacity: [0, 0, 0, 0, 0.9, 0.9, 0, 0],
-            scale: [0.9, 0.9, 0.9, 0.9, 1.12, 1.12, 0.9, 0.9],
-          }}
+          loop={{ opacity: [0, 0, 0, 0, 0.9, 0.9, 0, 0], scale: [0.9, 0.9, 0.9, 0.9, 1.12, 1.12, 0.9, 0.9] }}
           still={{ opacity: 0, scale: 0.9 }}
           position="absolute"
           inset="-8%"
@@ -256,11 +191,7 @@ export function SlideHero({ active = true }) {
             filter="sepia(.8) saturate(1.3)"
             fallback={<Box />}
           />
-          <Box
-            position="absolute"
-            inset={0}
-            bgGradient="linear(to-t, rgba(40,20,10,.55), transparent 55%)"
-          />
+          <Box position="absolute" inset={0} bgGradient="linear(to-t, rgba(40,20,10,.55), transparent 55%)" />
         </Anim>
 
         {/* floating opportunity cards */}
@@ -376,15 +307,7 @@ export function SlideCreators({ active = true }) {
         rounded="2xl"
         {...card}
       >
-        <Avatar
-          src={c.avatar}
-          name={c.name}
-          size="lg"
-          w="full"
-          h="90px"
-          rounded="xl"
-          borderRadius="xl"
-        />
+        <Avatar src={c.avatar} name={c.name} size="lg" w="full" h="90px" rounded="xl" borderRadius="xl" />
         <Text mt={2} fontSize="xs" fontWeight={700}>
           {c.name}
         </Text>
@@ -408,13 +331,7 @@ export function SlideCreators({ active = true }) {
         rounded="2xl"
         {...card}
       >
-        <Avatar
-          src={b.avatar}
-          name={b.name}
-          w="full"
-          h="90px"
-          borderRadius="xl"
-        />
+        <Avatar src={b.avatar} name={b.name} w="full" h="90px" borderRadius="xl" />
         <Text mt={2} fontSize="xs" fontWeight={700}>
           {b.name}
         </Text>
@@ -464,13 +381,7 @@ export function SlideCreators({ active = true }) {
           still={{ scale: 1 }}
           mt={3}
         >
-          <Button
-            size="sm"
-            variant="soft"
-            w="full"
-            pointerEvents="none"
-            tabIndex={-1}
-          >
+          <Button size="sm" variant="soft" w="full" pointerEvents="none" tabIndex={-1}>
             Follow
           </Button>
         </Anim>
@@ -480,11 +391,7 @@ export function SlideCreators({ active = true }) {
           play={play}
           times={[0, 0.54, 0.6, 0.7, 0.8, 1]}
           dur={T}
-          loop={{
-            opacity: [0, 0, 1, 1, 0, 0],
-            y: [0, 0, -8, -30, -46, -46],
-            scale: [0.2, 0.2, 1.3, 1, 1, 1],
-          }}
+          loop={{ opacity: [0, 0, 1, 1, 0, 0], y: [0, 0, -8, -30, -46, -46], scale: [0.2, 0.2, 1.3, 1, 1, 1] }}
           still={{ opacity: 0 }}
           position="absolute"
           left="50%"
@@ -526,13 +433,7 @@ export function SlideCreators({ active = true }) {
 
 const pointerStates = {
   idle: { opacity: 0, x: 44, y: 38, scale: 1, transition: { duration: 0.2 } },
-  aim: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.7, ease: "easeOut" },
-  },
+  aim: { opacity: 1, x: 0, y: 0, scale: 1, transition: { duration: 0.7, ease: "easeOut" } },
   press: { opacity: 1, x: 0, y: 0, scale: 0.8, transition: { duration: 0.15 } },
   done: { opacity: 0, x: 16, y: 18, scale: 1, transition: { duration: 0.4 } },
   out: { opacity: 0, x: 16, y: 18, scale: 1, transition: { duration: 0.1 } },
@@ -580,10 +481,7 @@ export function SlideGigs({ active = true }) {
             layout="position"
             initial={false}
             animate={{ x: slot ? 14 : 0 }}
-            transition={{
-              layout: { duration: 0.5, ease: "easeInOut" },
-              x: { duration: 0.4 },
-            }}
+            transition={{ layout: { duration: 0.5, ease: "easeInOut" }, x: { duration: 0.4 } }}
           >
             <M
               position="relative"
@@ -592,18 +490,8 @@ export function SlideGigs({ active = true }) {
               initial={false}
               animate={
                 leaving
-                  ? {
-                      x: -48,
-                      rotate: -6,
-                      opacity: 0,
-                      transition: { duration: 0.55, ease: "easeIn" },
-                    }
-                  : {
-                      x: 0,
-                      rotate: 0,
-                      opacity: 1,
-                      transition: { duration: 0.4, delay: 0.5 },
-                    }
+                  ? { x: -48, rotate: -6, opacity: 0, transition: { duration: 0.55, ease: "easeIn" } }
+                  : { x: 0, rotate: 0, opacity: 1, transition: { duration: 0.4, delay: 0.5 } }
               }
               {...card}
             >
@@ -667,12 +555,7 @@ export function SlideGigs({ active = true }) {
                 animate={{ opacity: checked ? 1 : 0, scale: checked ? 1 : 0.5 }}
                 transition={{ duration: 0.25 }}
               >
-                <svg
-                  viewBox="0 0 30 30"
-                  width="26"
-                  height="26"
-                  style={{ display: "block" }}
-                >
+                <svg viewBox="0 0 30 30" width="26" height="26" style={{ display: "block" }}>
                   <motion.path
                     d="M7 15.5 C9 17.2 10.8 19.2 12.2 21 C15.2 15.2 18.8 11.6 22.4 8.6"
                     fill="none"
@@ -681,14 +564,8 @@ export function SlideGigs({ active = true }) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     initial={false}
-                    animate={{
-                      pathLength: checked ? 1 : 0,
-                      opacity: checked ? 1 : 0,
-                    }}
-                    transition={{
-                      duration: checked ? 0.45 : 0,
-                      delay: checked ? 0.15 : 0,
-                    }}
+                    animate={{ pathLength: checked ? 1 : 0, opacity: checked ? 1 : 0 }}
+                    transition={{ duration: checked ? 0.45 : 0, delay: checked ? 0.15 : 0 }}
                   />
                 </svg>
               </M>
@@ -731,15 +608,7 @@ const LINKS = [
   [2, 3],
 ];
 const CONFETTI = [
-  [-46, -52],
-  [-22, -70],
-  [8, -64],
-  [34, -58],
-  [52, -34],
-  [-56, -22],
-  [20, -82],
-  [-34, -84],
-  [58, -62],
+  [-46, -52], [-22, -70], [8, -64], [34, -58], [52, -34], [-56, -22], [20, -82], [-34, -84], [58, -62],
 ];
 const CONFETTI_COLORS = [GOLD, TERRA, GOLD_SOFT, "#8A5A3A"];
 
@@ -752,23 +621,8 @@ export function SlideCommunities({ active = true }) {
   return (
     <Box position="relative" w="full" h="100%" overflowX="clip">
       {/* avatar cluster + connecting lines (fixed 220×110 so SVG + avatars stay aligned) */}
-      <Box
-        position="absolute"
-        top={0}
-        left="50%"
-        ml="-110px"
-        w="220px"
-        h="110px"
-        pointerEvents="none"
-        aria-hidden="true"
-      >
-        <chakra.svg
-          viewBox="0 0 220 110"
-          position="absolute"
-          inset={0}
-          w="220px"
-          h="110px"
-        >
+      <Box position="absolute" top={0} left="50%" ml="-110px" w="220px" h="110px" pointerEvents="none" aria-hidden="true">
+        <chakra.svg viewBox="0 0 220 110" position="absolute" inset={0} w="220px" h="110px">
           {LINKS.map(([p, q], i) => {
             const s = 0.2 + i * 0.03;
             const e = s + 0.1;
@@ -785,22 +639,10 @@ export function SlideCommunities({ active = true }) {
                 initial={false}
                 animate={
                   play
-                    ? {
-                        pathLength: [0, 0, 1, 1, 1, 0],
-                        opacity: [0, 0, 0.9, 0.9, 0, 0],
-                      }
+                    ? { pathLength: [0, 0, 1, 1, 1, 0], opacity: [0, 0, 0.9, 0.9, 0, 0] }
                     : { pathLength: 1, opacity: 0.55 }
                 }
-                transition={
-                  play
-                    ? {
-                        duration: T,
-                        times: [0, s, e, 0.9, 0.97, 1],
-                        ease: "easeInOut",
-                        repeat: Infinity,
-                      }
-                    : { duration: 0.25 }
-                }
+                transition={play ? { duration: T, times: [0, s, e, 0.9, 0.97, 1], ease: "easeInOut", repeat: Infinity } : { duration: 0.25 }}
               />
             );
           })}
@@ -840,15 +682,7 @@ export function SlideCommunities({ active = true }) {
       </Box>
 
       {/* community cards */}
-      <Flex
-        position="absolute"
-        left={0}
-        right={0}
-        bottom={0}
-        top="100px"
-        align="center"
-        justify="center"
-      >
+      <Flex position="absolute" left={0} right={0} bottom={0} top="100px" align="center" justify="center">
         {list.map((c, i) => {
           const center = i === 1;
           const rot = center ? 0 : i === 0 ? -5 : 5;
@@ -875,15 +709,7 @@ export function SlideCommunities({ active = true }) {
               rounded="2xl"
               {...card}
             >
-              <Image
-                src={c.cover}
-                alt=""
-                h={center ? "120px" : "92px"}
-                w="full"
-                objectFit="cover"
-                rounded="xl"
-                fallback={<Box h="92px" bg="app.cardAlt" rounded="xl" />}
-              />
+              <Image src={c.cover} alt="" h={center ? "120px" : "92px"} w="full" objectFit="cover" rounded="xl" fallback={<Box h="92px" bg="app.cardAlt" rounded="xl" />} />
               <Text fontSize="xs" fontWeight={700} mt={2} noOfLines={1}>
                 {c.name}
               </Text>
@@ -899,25 +725,12 @@ export function SlideCommunities({ active = true }) {
                   still={{ scale: 1 }}
                   mt={2}
                 >
-                  <Button
-                    size="xs"
-                    w="full"
-                    pointerEvents="none"
-                    tabIndex={-1}
-                    variant="brand"
-                  >
+                  <Button size="xs" w="full" pointerEvents="none" tabIndex={-1} variant="brand">
                     Join
                   </Button>
                 </Anim>
               ) : (
-                <Button
-                  size="xs"
-                  w="full"
-                  mt={2}
-                  pointerEvents="none"
-                  tabIndex={-1}
-                  variant="soft"
-                >
+                <Button size="xs" w="full" mt={2} pointerEvents="none" tabIndex={-1} variant="soft">
                   Join
                 </Button>
               )}
@@ -957,13 +770,7 @@ export function SlideCommunities({ active = true }) {
                         opacity: [0, 0, 1, 0, 0],
                         x: [0, 0, dx, dx * 1.15, dx * 1.15],
                         y: [0, 0, dy, dy + 24, dy + 24],
-                        rotate: [
-                          0,
-                          0,
-                          120 * (k % 2 ? 1 : -1),
-                          240 * (k % 2 ? 1 : -1),
-                          240 * (k % 2 ? 1 : -1),
-                        ],
+                        rotate: [0, 0, 120 * (k % 2 ? 1 : -1), 240 * (k % 2 ? 1 : -1), 240 * (k % 2 ? 1 : -1)],
                       }}
                       still={{ opacity: 0 }}
                       position="absolute"

@@ -119,8 +119,6 @@ export default function OnboardingPage() {
           </Button>
         </Flex>
 
-        {/* No AnimatePresence: it calls Math.random() on render, which Next 16
-            Cache Components rejects. Keyed remount + enter animation instead. */}
         <>
           <MotionBox
             key={slide.key}

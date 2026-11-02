@@ -186,7 +186,9 @@ theme.components.Avatar = {
       width: "var(--avatar-size)",
       height: "var(--avatar-size)",
       "--avatar-border-color": "var(--chakra-colors-app-card)",
-      "&:not([data-loaded])": { "--avatar-bg": "var(--chakra-colors-app-brand)" },
+      "&:not([data-loaded])": {
+        "--avatar-bg": "var(--chakra-colors-app-brand)",
+      },
     },
     label: { fontSize: "var(--avatar-font-size)", lineHeight: "1" },
   }),
